@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-MAINTAINER kgomera <kgomera@student.wethinkcode.co.za>
-
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y ca-certificates openssh-server wget postfix

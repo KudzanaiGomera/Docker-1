@@ -1,12 +1,10 @@
 FROM alpine
 
-MAINTAINER kgomera <kgomera@student.wethinkcode.co.za>
-
 RUN apk update && \
     apk upgrade && \
-    apk add emacs
+    apk add vim
 
-ENTRYPOINT emacs
+ENTRYPOINT vim
 
 # How to build it?
 # docker build -t ex00 .

@@ -1,7 +1,5 @@
 FROM debian
 
-MAINTAINER kgomera <kgomera@student.wethinkcode.co.za>
-
 ENV TS3SERVER_LICENSE=accept
 
 WORKDIR /home/teamspeak
