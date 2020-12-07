@@ -1,34 +1,61 @@
-KANBAN 看板
-===========
-`
-bundle install
-rails s
-`
+# Ruby on Rails Tutorial sample application
 
-Demo
-----
-Live demo hosted here on Heroku (database is reset daily):
-[**LIVE DEMO**](http://kanban.seanomlor.com)
+This is the reference implementation of the sample application for the 4th edition of [*Ruby on Rails Tutorial: Learn Web Development with Rails*](http://www.railstutorial.org/) by [Michael Hartl](http://www.michaelhartl.com/).
 
-[![Screenshot](/app/assets/images/screenshot.jpg)](http://kanban.seanomlor.com)
+## License
 
-Summary
--------
-Kanban is a work-in-progress Trello clone.
+All source code in the [Ruby on Rails Tutorial](http://railstutorial.org/) is available jointly under the MIT License and the Beerware License. See [LICENSE.md](LICENSE.md) for details.
 
-Built with Ruby on Rails on the backend as a JSON API for Backbone.js on the frontend.
+## Getting started
 
-Notes
------
-* Hand-rolled Rails user authentication with BCrypt
-* Custom, nested Rails JSON templating with [Rabl](https://github.com/nesquena/rabl)
-* Backbone models/collections with [Backbone-relational.js](http://backbonerelational.org/)
-* Auto-updating comment timestamps with jQuery [timeago](http://timeago.yarp.com)
-* Editable board, list and card titles with jQuery [JEditable](http://www.appelsiini.net/projects/jeditable)
+To get started with the app, clone the repo and then install the needed gems:
 
-License
--------
-Kanban is released under the [MIT License](/LICENSE).
+```
+$ cd /path/to/repos
+$ git clone https://bitbucket.org/railstutorial/sample_app_4th_ed.git sample_app_reference
+$ cd sample_app_reference
+$ bundle install --without production
+```
 
----
-Developed by [Sean Omlor](http://seanomlor.com)
+Next, migrate the database:
+
+```
+$ rails db:migrate
+```
+
+Finally, run the test suite to verify that everything is working correctly:
+
+```
+$ rails test
+```
+
+If the test suite passes, you'll be ready to run the app in a local server:
+
+```
+$ rails server
+```
+
+To check out the code for a particular chapter, first find the branch name using
+
+```
+$ git branch -a
+```
+
+A branch called `remotes/orgin/foo-bar` can be checked out using `git checkout foo-bar`.
+
+Next, copy the contents of the `Gemfile` using a text editor and then use
+
+```
+$ git checkout chapter-branch-name
+```
+
+to check out the chapter branch. Finally, copy the contents into the `Gemfile` and run
+
+```
+$ bundle update
+```
+
+At this point, the branch should be working. (You have to copy the `Gemfile` contents because it's incredibly hard to keep all branches up-to-date, so only the main one is guaranteed to be current.)
+
+For more information, see the
+[*Ruby on Rails Tutorial* book](http://www.railstutorial.org/book).

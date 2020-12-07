@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,108 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022040249) do
+ActiveRecord::Schema.define(version: 20160609220802) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "board_activities", force: :cascade do |t|
-    t.integer  "member_id",   null: false
-    t.integer  "board_id",    null: false
-    t.text     "description", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "board_activities", ["board_id"], name: "index_board_activities_on_board_id", using: :btree
-
-  create_table "board_members", force: :cascade do |t|
-    t.integer  "board_id",                   null: false
-    t.integer  "member_id",                  null: false
-    t.boolean  "admin",      default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "board_members", ["board_id", "member_id"], name: "index_board_members_on_board_id_and_member_id", unique: true, using: :btree
-  add_index "board_members", ["board_id"], name: "index_board_members_on_board_id", using: :btree
-
-  create_table "boards", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.boolean  "open",        default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "boards", ["open"], name: "index_boards_on_open", using: :btree
-
-  create_table "card_activities", force: :cascade do |t|
-    t.integer  "member_id",   null: false
-    t.integer  "card_id",     null: false
-    t.text     "description", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "card_activities", ["card_id"], name: "index_card_activities_on_card_id", using: :btree
-
-  create_table "card_comments", force: :cascade do |t|
-    t.integer  "card_id",      null: false
-    t.integer  "commenter_id", null: false
+  create_table "microposts", force: :cascade do |t|
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "picture"
+    t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
-  add_index "card_comments", ["card_id"], name: "index_card_comments_on_card_id", using: :btree
-
-  create_table "card_members", force: :cascade do |t|
-    t.integer  "card_id",    null: false
-    t.integer  "member_id",  null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
-
-  add_index "card_members", ["card_id", "member_id"], name: "index_card_members_on_card_id_and_member_id", unique: true, using: :btree
-  add_index "card_members", ["card_id"], name: "index_card_members_on_card_id", using: :btree
-
-  create_table "cards", force: :cascade do |t|
-    t.integer  "list_id",                    null: false
-    t.string   "title",                      null: false
-    t.text     "description"
-    t.datetime "due_date"
-    t.boolean  "open",        default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-    t.integer  "assignee_id"
-  end
-
-  add_index "cards", ["list_id"], name: "index_cards_on_list_id", using: :btree
-
-  create_table "lists", force: :cascade do |t|
-    t.integer  "board_id",                  null: false
-    t.string   "title"
-    t.boolean  "open",       default: true, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-  end
-
-  add_index "lists", ["board_id"], name: "index_lists_on_board_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           null: false
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "password_digest"
-    t.string   "session_key"
-    t.string   "activation_key"
-    t.string   "bio"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "full_name"
+    t.string   "remember_digest"
+    t.boolean  "admin",             default: false
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
-
-  add_index "users", ["session_key"], name: "index_users_on_session_key", using: :btree
 
 end
