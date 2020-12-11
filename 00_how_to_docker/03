@@ -1,6 +1,6 @@
 eval $(docker-machine env Char)
 
-#to check env
-#env | grep DOCKER
-#unset env
-#eval "$(docker-machine env -u)"
+# to check env
+# env | grep DOCKER
+# unset env
+# eval "$(docker-machine env -u)"
